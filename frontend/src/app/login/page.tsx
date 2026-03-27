@@ -11,25 +11,14 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const fillDemo = (role: 'student' | 'instructor') => {
-    if (role === 'student') {
-      setEmail('student@learnard.com');
-      setPassword('Password123!');
-    } else {
-      setEmail('instructor@learnard.com');
-      setPassword('Password123!');
-    }
-  };
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const performLogin = async (loginEmail: string, loginPassword: string) => {
     setError('');
     setLoading(true);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: loginEmail, password: loginPassword }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -50,6 +39,19 @@ export default function LoginPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const fillDemo = (role: 'student' | 'instructor') => {
+    const demoEmail = role === 'student' ? 'student@learnard.com' : 'instructor@learnard.com';
+    const demoPassword = 'Password123!';
+    setEmail(demoEmail);
+    setPassword(demoPassword);
+    performLogin(demoEmail, demoPassword);
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    performLogin(email, password);
   };
 
   return (
