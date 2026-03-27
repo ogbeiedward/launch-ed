@@ -22,7 +22,7 @@ export default function LoginPage() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.message || 'Login failed. Please check your credentials.');
+        setError(data.error || data.message || 'Login failed. Please check your credentials.');
         return;
       }
       // Store token and user info
