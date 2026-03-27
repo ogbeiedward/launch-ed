@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// SQLite doesn't support enums natively, using String instead
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String?
+  role          String    @default("STUDENT") // STUDENT, INSTRUCTOR, ADMIN
+  avatar        String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  createdCourses Course[] @relation("InstructorCourses")
+  enrollments    Enrollment[]
+  progress       Progress[]
+  quizAttempts   QuizAttempt[]
+}
+
+model Course {
+  id            String    @id @default(cuid())
+  title         String
+  description   String    
+  thumbnail     String?
+  price         Float     @default(0)
+  level         String    @default("BEGINNER") // BEGINNER, INTERMEDIATE, ADVANCED
+  category      String
+  isPublished   Boolean   @default(false)
+  
+  instructorId  String
+  instructor    User      @relation("InstructorCourses", fields: [instructorId], references: [id])
+  
+  sections      Section[]
+  enrollments   Enrollment[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Section {
+  id        String    @id @default(cuid())
+  title     String
+  order     Int
+  courseId  String
+  course    Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons   Lesson[]
+}
+
+model Lesson {
+  id          String      @id @default(cuid())
+  title       String
+  content     String?     
+  videoUrl    String?
+  type        String      @default("VIDEO") // VIDEO, TEXT
+  order       Int
+  isFree      Boolean     @default(false)
+  
+  sectionId   String
+  section     Section     @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  
+  attachments Attachment[]
+  progress    Progress[]
+  quiz        Quiz?
+}
+
+
+model Attachment {
+  id        String    @id @default(cuid())
+  name      String
+  url       String
+  lessonId  String
+  lesson    Lesson    @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+}
+
+model Progress {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonId    String
+  lesson      Lesson    @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  isCompleted Boolean   @default(false)
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([userId, lessonId])
+}
+
+model Enrollment {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId  String
+  course    Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+
+  @@unique([userId, courseId])
+}
+
+model Quiz {
+  id        String    @id @default(cuid())
+  lessonId  String    @unique
+  lesson    Lesson    @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  questions Question[]
+}
+
+model Question {
+  id          String   @id @default(cuid())
+  quizId      String
+  quiz        Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  text        String
+  options     String   // JSON stringified array
+  answer      Int      // Index of correct option
+}
+
+model QuizAttempt {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  quizId    String
+  score     Int
+  createdAt DateTime  @default(now())
+}
