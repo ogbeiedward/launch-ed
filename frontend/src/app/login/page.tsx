@@ -44,8 +44,7 @@ export default function LoginPage() {
   const fillDemo = (role: 'student' | 'instructor') => {
     const demoEmail = role === 'student' ? 'student@learnard.com' : 'instructor@learnard.com';
     const demoPassword = 'Password123!';
-    setEmail(demoEmail);
-    setPassword(demoPassword);
+    // Silent login: don't populate fields, just call the API
     performLogin(demoEmail, demoPassword);
   };
 
