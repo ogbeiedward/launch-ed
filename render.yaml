@@ -3,7 +3,7 @@ services:
     name: learnard-api
     runtime: node
     rootDir: backend
-    buildCommand: npm install && npm run build && npx prisma generate && npx prisma db push
+    buildCommand: npm install && npm run build && npx prisma generate && npx prisma db push && npx prisma db seed
     startCommand: npm start
     plan: free
     envVars:

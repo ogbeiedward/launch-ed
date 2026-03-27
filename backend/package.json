@@ -24,10 +24,11 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.12.7",
     "prisma": "^5.x",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.4.5"
   },
-  "devDependencies": {
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0"
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }
