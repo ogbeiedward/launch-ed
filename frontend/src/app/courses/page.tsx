@@ -5,9 +5,9 @@ import Link from 'next/link';
 
 export default function CoursesPage() {
   const courses = [
-    { id: '1', title: "Full Stack Development with Next.js", instructor: "Dr. Launch-Ed", price: "$49.99", level: "Intermediate" },
-    { id: '2', title: "UI/UX Mastery with Figma", instructor: "Design Guru", price: "$39.99", level: "Beginner" },
-    { id: '3', title: "Advanced TypeScript Patterns", instructor: "Code Master", price: "$59.99", level: "Advanced" }
+    { id: '1', title: "Fashion Design & Garment Making", instructor: "Bisi Fashion", price: "₦25,000", level: "Beginner" },
+    { id: '2', title: "Modern Plumbing & Pipefitting", instructor: "Engr. Musa", price: "₦35,000", level: "Intermediate" },
+    { id: '3', title: "Professional Catering & Culinary Arts", instructor: "Chef Chioma", price: "₦40,000", level: "Beginner" }
   ];
 
   return (

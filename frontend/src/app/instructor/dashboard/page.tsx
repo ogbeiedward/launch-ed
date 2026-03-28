@@ -5,15 +5,15 @@ import { motion } from 'framer-motion';
 export default function InstructorDashboard() {
   const stats = [
     { label: "Total Students", value: "1,248", change: "+12%", icon: "👥" },
-    { label: "Total Revenue", value: "$12,450", change: "+5%", icon: "💰" },
+    { label: "Total Revenue", value: "₦1,245,000", change: "+5%", icon: "💰" },
     { label: "Avg. Watch Time", value: "45m", change: "+3%", icon: "⏱️" },
     { label: "Course Rating", value: "4.8", change: "+0.1", icon: "⭐" },
   ];
 
   const recentActivity = [
-    { user: "Sarah Johnson", action: "enrolled in", course: "Next.js Mastery", time: "2h ago" },
-    { user: "Marcus Lee", action: "completed", course: "App Router Basics", time: "4h ago" },
-    { user: "Elena Rodriguez", action: "left a review", course: "TypeScript Advanced", time: "6h ago" },
+    { user: "Sarah Johnson", action: "enrolled in", course: "Fashion Design", time: "2h ago" },
+    { user: "Marcus Lee", action: "completed", course: "Plumbing Basics", time: "4h ago" },
+    { user: "Elena Rodriguez", action: "left a review", course: "Pattern Drafting", time: "6h ago" },
   ];
 
   return (

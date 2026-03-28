@@ -32,49 +32,63 @@ async function main() {
 
   // 3. Create Demo Courses
   const existingCourse = await prisma.course.findFirst({
-    where: { title: 'Full Stack Development with Next.js' }
+    where: { title: 'Professional Fashion Design & Garment Making' }
   });
 
   if (!existingCourse) {
     const course1 = await prisma.course.create({
       data: {
-        title: 'Full Stack Development with Next.js',
-        // ...
-        description: 'Learn to build modern, scalable web applications using Next.js, TypeScript, and Prisma.',
-        category: 'Development',
+        title: 'Professional Fashion Design & Garment Making',
+        description: 'Master the art of dressmaking, pattern drafting, and fashion illustration from scratch.',
+        category: 'Fashion',
         level: 'BEGINNER',
-        price: 99.99,
+        price: 25000,
         instructorId: instructor.id,
         isPublished: true,
         sections: {
           create: [
             {
-              title: 'Introduction',
+              title: 'Introduction to Fashion',
               order: 1,
               lessons: {
                 create: [
-                  { title: 'Welcome to the course', order: 1, type: 'VIDEO', videoUrl: 'https://placeholder.com/video1' },
-                  { title: 'Setting up your environment', order: 2, type: 'TEXT', content: 'Follow these steps to set up Node.js...' }
+                  { title: 'Tools of the Trade', order: 1, type: 'VIDEO', videoUrl: 'https://placeholder.com/video1' },
+                  { title: 'Understanding Fabrics', order: 2, type: 'TEXT', content: 'In this module, we discuss various fabric types including cotton, silk, and lace...' }
                 ]
               }
             },
             {
-              title: 'Main Concepts',
+              title: 'Pattern Drafting',
               order: 2,
               lessons: {
                 create: [
-                  { title: 'App Router Basics', order: 1, type: 'VIDEO', videoUrl: 'https://placeholder.com/video2' },
-                  { title: 'Quiz: Routing', order: 2, type: 'VIDEO', // Mocking quiz as lesson for simplicity in seed
-                    quiz: {
-                      create: {
-                        questions: {
-                          create: [
-                            { text: 'What is the root directory for Next.js App Router?', options: '["/src/pages", "/src/app", "/public", "/api"]', answer: 1 }
-                          ]
-                        }
-                      }
-                    }
-                  }
+                  { title: 'Measuring for Accuracy', order: 1, type: 'VIDEO', videoUrl: 'https://placeholder.com/video2' },
+                  { title: 'The Basic Bodice Block', order: 2, type: 'TEXT', content: 'Step-by-step guide to drafting your first bodice block.' }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    });
+
+    const course2 = await prisma.course.create({
+      data: {
+        title: 'Modern Plumbing & Home Maintenance',
+        description: 'Learn pipefitting, leak repairs, and modern installation techniques for residential buildings.',
+        category: 'Construction',
+        level: 'INTERMEDIATE',
+        price: 35000,
+        instructorId: instructor.id,
+        isPublished: true,
+        sections: {
+          create: [
+            {
+              title: 'Plumbing Fundamentals',
+              order: 1,
+              lessons: {
+                create: [
+                  { title: 'Safety Gear & Precautions', order: 1, type: 'VIDEO', videoUrl: 'https://placeholder.com/video3' }
                 ]
               }
             }

@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 
 export default function StudentDashboard() {
   const enrolledCourses = [
-    { title: "Full Stack Development with Next.js", progress: 65, instructor: "Dr. Launch-Ed", image: "/course1.jpg" },
-    { title: "UI/UX Mastery with Figma", progress: 20, instructor: "Design Guru", image: "/course2.jpg" }
+    { title: "Fashion Design & Garment Making", progress: 65, instructor: "Bisi Fashion", image: "/course1.jpg" },
+    { title: "Modern Plumbing & Pipefitting", progress: 20, instructor: "Engr. Musa", image: "/course2.jpg" }
   ];
 
   return (
